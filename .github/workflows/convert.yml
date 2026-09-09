@@ -14,15 +14,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run Subconverter & Download
+      - name: Run Subconverter Container
         run: |
-          # Запуск subconverter без фиксированного имени контейнера во избежание конфликтов 125
-          docker run -d --rm -p 25500:25500 tian322/subconverter:latest
-          
-          # Ожидание инициализации сервиса
+          docker run -d --rm --name subconverter -p 25500:25500 tindy2013/subconverter:latest
           sleep 5
-          
-          # Загрузка и конвертация подписки
+
+      - name: Download & Convert
+        run: |
           curl -s "http://127.0.0.1:25500/sub?target=clash&url=https%3A%2F%2Fsub.kushmakers.org%2Fnew%2FvhipHZeuGxXZfzJ9Z6ESUS" -o sub.yml
 
       - name: Commit and Push sub.yml
