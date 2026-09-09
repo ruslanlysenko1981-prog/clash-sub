@@ -1,0 +1,29 @@
+name: Convert Subscription
+
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Автообновление каждые 6 часов
+  workflow_dispatch: # Возможность запустить вручную в любой момент
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Convert Subscription to Clash
+        run: |
+          # Запускаем локальный subconverter в контейнере Docker
+          docker run -d --name subconverter -p 25500:25500 tian322/subconverter:latest
+          sleep 5
+          # Запрашиваем конвертацию подписки
+          curl -s "http://127.0.0.1:25500/sub?target=clash&url=https%3A%2F%2Fsub.kushmakers.org%2Fnew%2FvhipHZeuGxXZfzJ9Z6ESUS" -o sub.yml
+
+      - name: Commit and Push sub.yml
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add sub.yml
+          git commit -m "Auto update sub.yml" || exit 0
+          git push
