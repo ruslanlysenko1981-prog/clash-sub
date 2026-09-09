@@ -8,22 +8,24 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Start Subconverter Container
+      - name: Run Subconverter & Download
         run: |
-          docker run -d --name subconverter -p 25500:25500 tian322/subconverter:latest
-          sleep 5
-
-      - name: Download and Convert
-        run: |
-          curl -s "http://127.0.0.1:25500/sub?target=clash&url=https%3A%2F%2Fsub.kushmakers.org%2Fnew%2FvhipHZeuGxXZfzJ9Z6ESUS" -o sub.yml
+          # Запуск subconverter без фиксированного имени контейнера во избежание конфликтов 125
+          docker run -d --rm -p 25500:25500 tian322/subconverter:latest
           
+          # Ожидание инициализации сервиса
+          sleep 5
+          
+          # Загрузка и конвертация подписки
+          curl -s "http://127.0.0.1:25500/sub?target=clash&url=https%3A%2F%2Fsub.kushmakers.org%2Fnew%2FvhipHZeuGxXZfzJ9Z6ESUS" -o sub.yml
+
       - name: Commit and Push sub.yml
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
