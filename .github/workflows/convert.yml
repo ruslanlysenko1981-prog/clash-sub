@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install tools
-        run: sudo apt-get update && sudo apt-get install -y jq curl
+        run: sudo apt-get update && sudo apt-get install -y jq curl python3
 
       - name: Run Subconverter Container
         run: |
@@ -39,11 +39,12 @@ jobs:
             "&flow=" + (.settings.vnext[0].users[0].flow // "") + 
             "#" + (.tag // "VLESS")' raw_config.json | sort -u > links.txt
 
-          # 3. Кодируем ссылки в Base64 для передачи в Subconverter
-          URLS_BASE64=$(cat links.txt | base64 -w 0 | jq -rr @uri)
+          # 3. Кодируем полученный массив ссылок в Base64 и затем URL-encode для передачи в Subconverter
+          BASE64_LINKS=$(cat links.txt | base64 -w 0)
+          ENCODED_URL=$(python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.argv[1]))" "$BASE64_LINKS")
 
           # 4. Запрашиваем конвертацию у локального Subconverter
-          curl -s "http://127.0.0.1:25500/sub?target=clash&url=${URLS_BASE64}" -o sub.yml
+          curl -s "http://127.0.0.1:25500/sub?target=clash&url=${ENCODED_URL}" -o sub.yml
 
       - name: Commit and Push sub.yml
         run: |
