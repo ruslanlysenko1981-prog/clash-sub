@@ -32,24 +32,34 @@ jobs:
             "vless://" + .settings.vnext[0].users[0].id + "@" + .settings.vnext[0].address + ":" + (.settings.vnext[0].port|tostring) + 
             "?type=" + (.streamSettings.network // "tcp") + 
             "&security=" + (.streamSettings.security // "none") + 
-            "&pbk=" + (.streamSettings.realitySettings.publicKey // "") + 
-            "&fp=" + (.streamSettings.realitySettings.fingerprint // "chrome") + 
-            "&sni=" + (.streamSettings.realitySettings.serverName // "") + 
-            "&sid=" + (.streamSettings.realitySettings.shortId // "") + 
-            "&flow=" + (.settings.vnext[0].users[0].flow // "") + 
-            "#" + (.tag // "VLESS")' raw_config.json | sort -u > links.txt
+            (if .streamSettings.realitySettings.publicKey then "&pbk=" + .streamSettings.realitySettings.publicKey else "" end) + 
+            (if .streamSettings.realitySettings.fingerprint then "&fp=" + .streamSettings.realitySettings.fingerprint else "" end) + 
+            (if .streamSettings.realitySettings.serverName then "&sni=" + .streamSettings.realitySettings.serverName else "" end) + 
+            (if .streamSettings.realitySettings.shortId then "&sid=" + .streamSettings.realitySettings.shortId else "" end) + 
+            (if .settings.vnext[0].users[0].flow then "&flow=" + .settings.vnext[0].users[0].flow else "" end) + 
+            "#" + ((.tag // "VLESS") | @uri)' raw_config.json | sort -u > links.txt
 
-          # 3. Кодируем полученный массив ссылок в Base64 и затем URL-encode для передачи в Subconverter
-          BASE64_LINKS=$(cat links.txt | base64 -w 0)
-          ENCODED_URL=$(python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.argv[1]))" "$BASE64_LINKS")
+          # Проверяем, что ссылки создались
+          echo "=== Найдено ссылок: $(wc -l < links.txt) ==="
+          cat links.txt
 
-          # 4. Запрашиваем конвертацию у локального Subconverter
-          curl -s "http://127.0.0.1:25500/sub?target=clash&url=${ENCODED_URL}" -o sub.yml
+          # 3. Делаем Base64 подписку (стандартный формат для V2Ray/Sing-Box/Streisand клиентов)
+          base64 -w 0 links.txt > sub_base64.txt
 
-      - name: Commit and Push sub.yml
+          # 4. Передаем Base64 напрямую в Subconverter через data-scheme
+          B64_CONTENT=$(cat sub_base64.txt)
+          ENCODED_DATA=$(python3 -c "import urllib.parse; print(urllib.parse.quote('data:text/plain;base64,' + '$B64_CONTENT'))")
+
+          curl -s "http://127.0.0.1:25500/sub?target=clash&url=${ENCODED_DATA}" -o sub.yml
+
+          # Выводим начала файла sub.yml для отладки в логах Actions
+          echo "=== Результат sub.yml ==="
+          head -n 25 sub.yml
+
+      - name: Commit and Push sub.yml & sub_base64.txt
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add sub.yml
-          git commit -m "Auto update sub.yml" || exit 0
+          git add sub.yml sub_base64.txt links.txt
+          git commit -m "Auto update subscriptions" || exit 0
           git push
