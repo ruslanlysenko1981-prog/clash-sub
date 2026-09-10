@@ -14,14 +14,36 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install tools
+        run: sudo apt-get update && sudo apt-get install -y jq curl
+
       - name: Run Subconverter Container
         run: |
           docker run -d --rm --name subconverter -p 25500:25500 tindy2013/subconverter:latest
           sleep 5
 
-      - name: Download & Convert
+      - name: Extract VLESS Links and Convert to Clash
         run: |
-          curl -s "http://127.0.0.1:25500/sub?target=clash&url=https%3A%2F%2Fsub.kushmakers.org%2Fnew%2FvhipHZeuGxXZfzJ9Z6ESUS" -o sub.yml
+          # 1. Скачиваем исходный JSON
+          curl -s "https://sub.kushmakers.org/new/vhipHZeuGxXZfzJ9Z6ESUS" -o raw_config.json
+
+          # 2. Парсим VLESS элементы из массива outbounds и формируем URI ссылки
+          jq -r '.[] | .outbounds[]? | select(.protocol=="vless") | 
+            "vless://" + .settings.vnext[0].users[0].id + "@" + .settings.vnext[0].address + ":" + (.settings.vnext[0].port|tostring) + 
+            "?type=" + (.streamSettings.network // "tcp") + 
+            "&security=" + (.streamSettings.security // "none") + 
+            "&pbk=" + (.streamSettings.realitySettings.publicKey // "") + 
+            "&fp=" + (.streamSettings.realitySettings.fingerprint // "chrome") + 
+            "&sni=" + (.streamSettings.realitySettings.serverName // "") + 
+            "&sid=" + (.streamSettings.realitySettings.shortId // "") + 
+            "&flow=" + (.settings.vnext[0].users[0].flow // "") + 
+            "#" + (.tag // "VLESS")' raw_config.json | sort -u > links.txt
+
+          # 3. Кодируем ссылки в Base64 для передачи в Subconverter
+          URLS_BASE64=$(cat links.txt | base64 -w 0 | jq -rr @uri)
+
+          # 4. Запрашиваем конвертацию у локального Subconverter
+          curl -s "http://127.0.0.1:25500/sub?target=clash&url=${URLS_BASE64}" -o sub.yml
 
       - name: Commit and Push sub.yml
         run: |
