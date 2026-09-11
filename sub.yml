@@ -3,6 +3,16 @@ socks-port: 7891
 allow-lan: true
 mode: rule
 log-level: info
+dns:
+  enable: true
+  listen: 0.0.0.0:5353
+  enhanced-mode: fake-ip
+  nameserver:
+  - https://1.1.1.1/dns-query
+  - https://8.8.8.8/dns-query
+  fallback:
+  - tls://1.0.0.1:853
+  - tls://8.8.4.4:853
 proxies:
 - name: wl-vkc
   type: vless
