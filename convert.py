@@ -22,10 +22,8 @@ for item in raw:
             stream = out.get("streamSettings", {})
             reality = stream.get("realitySettings", {})
             
-            # Получаем базовое имя ноды
             raw_name = out.get("tag", "VLESS-Node").strip()
             
-            # Устраняем дубликаты имён (добавляем индекс -1, -2 и т.д.)
             if raw_name in seen_names:
                 seen_names[raw_name] += 1
                 unique_name = f"{raw_name} - {seen_names[raw_name]}"
@@ -62,13 +60,26 @@ for item in raw:
 
 proxy_names = [p["name"] for p in proxies]
 
-# 3. Собираем итоговую конфигурацию Clash Meta
+# 3. Собираем итоговую конфигурацию Clash Meta с блоком DNS
 clash_config = {
     "port": 7890,
     "socks-port": 7891,
     "allow-lan": True,
     "mode": "rule",
     "log-level": "info",
+    "dns": {
+        "enable": True,
+        "listen": "0.0.0.0:5353",
+        "enhanced-mode": "fake-ip",
+        "nameserver": [
+            "https://1.1.1.1/dns-query",
+            "https://8.8.8.8/dns-query"
+        ],
+        "fallback": [
+            "tls://1.0.0.1:853",
+            "tls://8.8.4.4:853"
+        ]
+    },
     "proxies": proxies,
     "proxy-groups": [
         {
