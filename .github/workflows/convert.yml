@@ -27,7 +27,7 @@ jobs:
           # 1. Скачиваем исходный JSON
           curl -s "https://sub.kushmakers.org/new/vhipHZeuGxXZfzJ9Z6ESUS" -o raw_config.json
 
-          # 2. Парсим VLESS элементы из массива outbounds и формируем URI ссылки
+          # 2. Извлекаем VLESS ноды и формируем корректные vless:// ссылки
           jq -r '.[] | .outbounds[]? | select(.protocol=="vless") | 
             "vless://" + .settings.vnext[0].users[0].id + "@" + .settings.vnext[0].address + ":" + (.settings.vnext[0].port|tostring) + 
             "?type=" + (.streamSettings.network // "tcp") + 
@@ -39,22 +39,25 @@ jobs:
             (if .settings.vnext[0].users[0].flow then "&flow=" + .settings.vnext[0].users[0].flow else "" end) + 
             "#" + ((.tag // "VLESS") | @uri)' raw_config.json | sort -u > links.txt
 
-          # Проверяем, что ссылки создались
-          echo "=== Найдено ссылок: $(wc -l < links.txt) ==="
-          cat links.txt
-
-          # 3. Делаем Base64 подписку (стандартный формат для V2Ray/Sing-Box/Streisand клиентов)
+          # 3. Делаем Base64 подписку
           base64 -w 0 links.txt > sub_base64.txt
 
-          # 4. Передаем Base64 напрямую в Subconverter через data-scheme
-          B64_CONTENT=$(cat sub_base64.txt)
-          ENCODED_DATA=$(python3 -c "import urllib.parse; print(urllib.parse.quote('data:text/plain;base64,' + '$B64_CONTENT'))")
+          # 4. Запускаем локальный веб-сервер в фоновом режиме на порту 8000
+          python3 -m http.server 8000 &
+          PY_PID=$!
+          sleep 2
 
-          curl -s "http://127.0.0.1:25500/sub?target=clash&url=${ENCODED_DATA}" -o sub.yml
+          # 5. Запрашиваем у Subconverter генерацию Clash конфига, передавая ссылку на наш локальный веб-сервер
+          # Если Subconverter запущен в Docker с --net=host или пробросом портов, он достучится до 172.17.0.1 (Docker Gateway) или host.docker.internal
+          DOCKER_GATEWAY=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.Gateway}}{{end}}' subconverter)
+          curl -s "http://127.0.0.1:25500/sub?target=clash&url=http://${DOCKER_GATEWAY}:8000/sub_base64.txt" -o sub.yml
 
-          # Выводим начала файла sub.yml для отладки в логах Actions
+          # Оправляем процесс локального веб-сервера
+          kill $PY_PID
+
+          # Выводим первые 30 строк sub.yml в логи для проверки
           echo "=== Результат sub.yml ==="
-          head -n 25 sub.yml
+          head -n 30 sub.yml
 
       - name: Commit and Push sub.yml & sub_base64.txt
         run: |
