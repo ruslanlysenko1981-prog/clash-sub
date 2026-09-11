@@ -40,8 +40,8 @@ jobs:
           # 3. Делаем Base64 подписку
           base64 -w 0 links.txt > sub_base64.txt
 
-          # 4. Формируем sub.yml (Clash Meta format) напрямую из JSON
-          python3 -c '
+          # 4. Создаем python-скрипт конвертации без YAML-ошибок
+          cat << 'EOF' > parse.py
 import json, yaml
 
 with open("raw_config.json", "r") as f:
@@ -116,7 +116,10 @@ clash_config = {
 
 with open("sub.yml", "w", encoding="utf-8") as f:
     yaml.dump(clash_config, f, allow_unicode=True, sort_keys=False)
-'
+EOF
+
+          # 5. Запускаем конвертацию
+          python3 parse.py
 
       - name: Commit and Push sub.yml & sub_base64.txt
         run: |
