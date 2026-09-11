@@ -144,7 +144,7 @@ proxies:
     short-id: db04ce8bdb8900f1
   servername: prod.pl-node-01.security-sbrf.ru
   client-fingerprint: firefox
-- name: proxy
+- name: proxy - 2
   type: vless
   server: 31.77.161.15
   port: 443
@@ -158,7 +158,7 @@ proxies:
     short-id: db04ce8bdb8900f1
   servername: nvidia.com
   client-fingerprint: firefox
-- name: proxy
+- name: proxy - 3
   type: vless
   server: ooqe994.6551935.xyz
   port: 443
@@ -172,7 +172,7 @@ proxies:
     short-id: db04ce8bdb8900f1
   servername: nvidia.com
   client-fingerprint: firefox
-- name: proxy
+- name: proxy - 4
   type: vless
   server: vless-addr.h2fl.security-sbrf.ru
   port: 443
@@ -186,7 +186,7 @@ proxies:
     short-id: db04ce8bdb8900f1
   servername: nvidia.com
   client-fingerprint: firefox
-- name: proxy
+- name: proxy - 5
   type: vless
   server: temp-nl-addr.security-sbrf.ru
   port: 443
@@ -200,7 +200,7 @@ proxies:
     short-id: db04ce8bdb8900f1
   servername: prod.pl-node-01.security-sbrf.ru
   client-fingerprint: firefox
-- name: proxy
+- name: proxy - 6
   type: vless
   server: 31.76.39.230
   port: 443
@@ -214,7 +214,7 @@ proxies:
     short-id: db04ce8bdb8900f1
   servername: nvidia.com
   client-fingerprint: firefox
-- name: proxy
+- name: proxy - 7
   type: vless
   server: 85.192.48.142
   port: 443
@@ -228,7 +228,7 @@ proxies:
     short-id: db04ce8bdb8900f1
   servername: nvidia.com
   client-fingerprint: firefox
-- name: proxy
+- name: proxy - 8
   type: vless
   server: 201.24.115.189
   port: 443
@@ -242,7 +242,7 @@ proxies:
     short-id: db04ce8bdb8900f1
   servername: nvidia.com
   client-fingerprint: firefox
-- name: proxy
+- name: proxy - 9
   type: vless
   server: 31.76.249.109
   port: 443
@@ -256,7 +256,7 @@ proxies:
     short-id: db04ce8bdb8900f1
   servername: nvidia.com
   client-fingerprint: firefox
-- name: proxy
+- name: proxy - 10
   type: vless
   server: 31.76.91.132
   port: 443
@@ -270,7 +270,7 @@ proxies:
     short-id: db04ce8bdb8900f1
   servername: nvidia.com
   client-fingerprint: firefox
-- name: proxy
+- name: proxy - 11
   type: vless
   server: 144.31.131.38
   port: 443
@@ -284,7 +284,7 @@ proxies:
     short-id: db04ce8bdb8900f1
   servername: prod.pl-node-01.security-sbrf.ru
   client-fingerprint: firefox
-- name: wl-vkc
+- name: wl-vkc - 2
   type: vless
   server: 90.156.218.163
   port: 443
@@ -298,7 +298,7 @@ proxies:
     short-id: db04ce8bdb8900f1
   servername: eh.vk.ru
   client-fingerprint: firefox
-- name: wl-regru
+- name: wl-regru - 2
   type: vless
   server: reg-bal.security-sbrf.ru
   port: 555
@@ -312,7 +312,7 @@ proxies:
     short-id: db04ce8bdb8900f1
   servername: prod.pl-node-01.security-sbrf.ru
   client-fingerprint: firefox
-- name: wl-selectel
+- name: wl-selectel - 2
   type: vless
   server: 87.228.101.143
   port: 443
@@ -326,7 +326,7 @@ proxies:
     short-id: db04ce8bdb8900f1
   servername: eh.vk.ru
   client-fingerprint: firefox
-- name: wl-timeweb
+- name: wl-timeweb - 2
   type: vless
   server: 188.225.79.44
   port: 443
@@ -340,7 +340,7 @@ proxies:
     short-id: db04ce8bdb8900f1
   servername: eh.vk.ru
   client-fingerprint: firefox
-- name: proxy
+- name: proxy - 12
   type: vless
   server: 90.156.218.163
   port: 443
@@ -354,7 +354,7 @@ proxies:
     short-id: db04ce8bdb8900f1
   servername: eh.vk.ru
   client-fingerprint: firefox
-- name: proxy
+- name: proxy - 13
   type: vless
   server: 188.225.79.44
   port: 443
@@ -383,22 +383,22 @@ proxy-groups:
   - candidate-4
   - candidate-6
   - proxy
-  - proxy
-  - proxy
-  - proxy
-  - proxy
-  - proxy
-  - proxy
-  - proxy
-  - proxy
-  - proxy
-  - proxy
-  - wl-vkc
-  - wl-regru
-  - wl-selectel
-  - wl-timeweb
-  - proxy
-  - proxy
+  - proxy - 2
+  - proxy - 3
+  - proxy - 4
+  - proxy - 5
+  - proxy - 6
+  - proxy - 7
+  - proxy - 8
+  - proxy - 9
+  - proxy - 10
+  - proxy - 11
+  - wl-vkc - 2
+  - wl-regru - 2
+  - wl-selectel - 2
+  - wl-timeweb - 2
+  - proxy - 12
+  - proxy - 13
 - name: AUTO
   type: url-test
   url: http://www.gstatic.com/generate_204
@@ -414,22 +414,22 @@ proxy-groups:
   - candidate-4
   - candidate-6
   - proxy
-  - proxy
-  - proxy
-  - proxy
-  - proxy
-  - proxy
-  - proxy
-  - proxy
-  - proxy
-  - proxy
-  - proxy
-  - wl-vkc
-  - wl-regru
-  - wl-selectel
-  - wl-timeweb
-  - proxy
-  - proxy
+  - proxy - 2
+  - proxy - 3
+  - proxy - 4
+  - proxy - 5
+  - proxy - 6
+  - proxy - 7
+  - proxy - 8
+  - proxy - 9
+  - proxy - 10
+  - proxy - 11
+  - wl-vkc - 2
+  - wl-regru - 2
+  - wl-selectel - 2
+  - wl-timeweb - 2
+  - proxy - 12
+  - proxy - 13
 rules:
 - GEOIP,LAN,DIRECT
 - MATCH,PROXIES
