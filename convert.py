@@ -10,6 +10,7 @@ except Exception as e:
     raw = []
 
 proxies = []
+seen_names = {}
 
 # 2. Извлекаем VLESS ноды
 for item in raw:
@@ -21,8 +22,19 @@ for item in raw:
             stream = out.get("streamSettings", {})
             reality = stream.get("realitySettings", {})
             
+            # Получаем базовое имя ноды
+            raw_name = out.get("tag", "VLESS-Node").strip()
+            
+            # Устраняем дубликаты имён (добавляем индекс -1, -2 и т.д.)
+            if raw_name in seen_names:
+                seen_names[raw_name] += 1
+                unique_name = f"{raw_name} - {seen_names[raw_name]}"
+            else:
+                seen_names[raw_name] = 1
+                unique_name = raw_name
+            
             node = {
-                "name": out.get("tag", "VLESS-Node"),
+                "name": unique_name,
                 "type": "vless",
                 "server": vnext.get("address"),
                 "port": int(vnext.get("port")),
