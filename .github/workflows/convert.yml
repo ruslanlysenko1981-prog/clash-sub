@@ -20,12 +20,12 @@ jobs:
           sudo apt-get install -y jq curl python3 python3-pip
           pip3 install pyyaml --break-system-packages || pip3 install pyyaml
 
-      - name: Extract VLESS Links and Convert to Clash
+      - name: Run Conversion
         run: |
           # 1. Скачиваем исходный JSON
           curl -s "https://sub.kushmakers.org/new/vhipHZeuGxXZfzJ9Z6ESUS" -o raw_config.json
 
-          # 2. Извлекаем VLESS ноды и формируем ссылки
+          # 2. Вытаскиваем vless:// ссылки для links.txt и sub_base64.txt
           jq -r '.[] | .outbounds[]? | select(.protocol=="vless") | 
             "vless://" + .settings.vnext[0].users[0].id + "@" + .settings.vnext[0].address + ":" + (.settings.vnext[0].port|tostring) + 
             "?type=" + (.streamSettings.network // "tcp") + 
@@ -37,91 +37,12 @@ jobs:
             (if .settings.vnext[0].users[0].flow then "&flow=" + .settings.vnext[0].users[0].flow else "" end) + 
             "#" + ((.tag // "VLESS") | @uri)' raw_config.json | sort -u > links.txt
 
-          # 3. Делаем Base64 подписку
           base64 -w 0 links.txt > sub_base64.txt
 
-          # 4. Создаем python-скрипт конвертации без YAML-ошибок
-          cat << 'EOF' > parse.py
-import json, yaml
+          # 3. Запускаем обработку через наш скрипт
+          python3 convert.py
 
-with open("raw_config.json", "r") as f:
-    raw = json.load(f)
-
-proxies = []
-
-for item in raw:
-    outbounds = item.get("outbounds", [])
-    for out in outbounds:
-        if out.get("protocol") == "vless":
-            vnext = out.get("settings", {}).get("vnext", [{}])[0]
-            user = vnext.get("users", [{}])[0]
-            stream = out.get("streamSettings", {})
-            reality = stream.get("realitySettings", {})
-            
-            node = {
-                "name": out.get("tag", "VLESS-Node"),
-                "type": "vless",
-                "server": vnext.get("address"),
-                "port": int(vnext.get("port")),
-                "uuid": user.get("id"),
-                "udp": True,
-                "tls": stream.get("security") in ["tls", "reality"],
-                "network": stream.get("network", "tcp")
-            }
-            
-            if user.get("flow"):
-                node["flow"] = user.get("flow")
-                
-            if stream.get("security") == "reality":
-                node["reality-opts"] = {}
-                if reality.get("publicKey"):
-                    node["reality-opts"]["public-key"] = reality.get("publicKey")
-                if reality.get("shortId"):
-                    node["reality-opts"]["short-id"] = reality.get("shortId")
-                if reality.get("serverName"):
-                    node["servername"] = reality.get("serverName")
-                if reality.get("fingerprint"):
-                    node["client-fingerprint"] = reality.get("fingerprint")
-
-            proxies.append(node)
-
-proxy_names = [p["name"] for p in proxies]
-
-clash_config = {
-    "port": 7890,
-    "socks-port": 7891,
-    "allow-lan": True,
-    "mode": "rule",
-    "log-level": "info",
-    "proxies": proxies,
-    "proxy-groups": [
-        {
-            "name": "PROXIES",
-            "type": "select",
-            "proxies": ["AUTO"] + proxy_names
-        },
-        {
-            "name": "AUTO",
-            "type": "url-test",
-            "url": "http://www.gstatic.com/generate_204",
-            "interval": 300,
-            "proxies": proxy_names
-        }
-    ],
-    "rules": [
-        "GEOIP,LAN,DIRECT",
-        "MATCH,PROXIES"
-    ]
-}
-
-with open("sub.yml", "w", encoding="utf-8") as f:
-    yaml.dump(clash_config, f, allow_unicode=True, sort_keys=False)
-EOF
-
-          # 5. Запускаем конвертацию
-          python3 parse.py
-
-      - name: Commit and Push sub.yml & sub_base64.txt
+      - name: Commit and Push
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
