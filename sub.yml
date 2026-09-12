@@ -72,7 +72,7 @@ proxies:
   client-fingerprint: firefox
 - name: candidate
   type: vless
-  server: temp-nl-addr.security-sbrf.ru
+  server: 31.56.184.205
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   udp: true
@@ -198,7 +198,7 @@ proxies:
   client-fingerprint: firefox
 - name: proxy - 5
   type: vless
-  server: temp-nl-addr.security-sbrf.ru
+  server: 31.56.184.205
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   udp: true
