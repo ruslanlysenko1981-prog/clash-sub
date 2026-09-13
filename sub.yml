@@ -72,7 +72,7 @@ proxies:
   client-fingerprint: firefox
 - name: candidate
   type: vless
-  server: 31.56.184.205
+  server: 31.77.114.114
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   udp: true
@@ -82,7 +82,7 @@ proxies:
   reality-opts:
     public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
     short-id: db04ce8bdb8900f1
-  servername: prod.pl-node-01.security-sbrf.ru
+  servername: api.vk.me
   client-fingerprint: firefox
 - name: candidate-2
   type: vless
@@ -142,6 +142,20 @@ proxies:
   client-fingerprint: firefox
 - name: proxy
   type: vless
+  server: 31.77.114.114
+  port: 443
+  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
+  udp: true
+  tls: true
+  network: tcp
+  flow: xtls-rprx-vision
+  reality-opts:
+    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
+    short-id: db04ce8bdb8900f1
+  servername: api.vk.me
+  client-fingerprint: firefox
+- name: proxy - 2
+  type: vless
   server: 144.31.131.38
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
@@ -153,20 +167,6 @@ proxies:
     public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
     short-id: db04ce8bdb8900f1
   servername: prod.pl-node-01.security-sbrf.ru
-  client-fingerprint: firefox
-- name: proxy - 2
-  type: vless
-  server: 31.77.161.15
-  port: 443
-  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
-  udp: true
-  tls: true
-  network: tcp
-  flow: xtls-rprx-vision
-  reality-opts:
-    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
-    short-id: db04ce8bdb8900f1
-  servername: nvidia.com
   client-fingerprint: firefox
 - name: proxy - 3
   type: vless
@@ -184,7 +184,7 @@ proxies:
   client-fingerprint: firefox
 - name: proxy - 4
   type: vless
-  server: vless-addr.h2fl.security-sbrf.ru
+  server: 31.77.161.15
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   udp: true
@@ -198,7 +198,7 @@ proxies:
   client-fingerprint: firefox
 - name: proxy - 5
   type: vless
-  server: 31.56.184.205
+  server: vless-addr.h2fl.security-sbrf.ru
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   udp: true
@@ -208,7 +208,7 @@ proxies:
   reality-opts:
     public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
     short-id: db04ce8bdb8900f1
-  servername: prod.pl-node-01.security-sbrf.ru
+  servername: nvidia.com
   client-fingerprint: firefox
 - name: proxy - 6
   type: vless
