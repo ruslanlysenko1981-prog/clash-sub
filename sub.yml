@@ -126,20 +126,6 @@ proxies:
     short-id: db04ce8bdb8900f1
   servername: prod.pl-node-01.security-sbrf.ru
   client-fingerprint: firefox
-- name: candidate-6
-  type: vless
-  server: vless-addr.h2fl.security-sbrf.ru
-  port: 443
-  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
-  udp: true
-  tls: true
-  network: tcp
-  flow: xtls-rprx-vision
-  reality-opts:
-    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
-    short-id: db04ce8bdb8900f1
-  servername: nvidia.com
-  client-fingerprint: firefox
 - name: proxy
   type: vless
   server: 31.77.114.114
@@ -198,7 +184,7 @@ proxies:
   client-fingerprint: firefox
 - name: proxy - 5
   type: vless
-  server: vless-addr.h2fl.security-sbrf.ru
+  server: 31.76.39.230
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   udp: true
@@ -212,7 +198,7 @@ proxies:
   client-fingerprint: firefox
 - name: proxy - 6
   type: vless
-  server: 31.76.39.230
+  server: 85.192.48.142
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   udp: true
@@ -226,7 +212,7 @@ proxies:
   client-fingerprint: firefox
 - name: proxy - 7
   type: vless
-  server: 85.192.48.142
+  server: 201.24.115.189
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   udp: true
@@ -240,7 +226,7 @@ proxies:
   client-fingerprint: firefox
 - name: proxy - 8
   type: vless
-  server: 201.24.115.189
+  server: 31.76.249.109
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   udp: true
@@ -254,20 +240,6 @@ proxies:
   client-fingerprint: firefox
 - name: proxy - 9
   type: vless
-  server: 31.76.249.109
-  port: 443
-  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
-  udp: true
-  tls: true
-  network: tcp
-  flow: xtls-rprx-vision
-  reality-opts:
-    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
-    short-id: db04ce8bdb8900f1
-  servername: nvidia.com
-  client-fingerprint: firefox
-- name: proxy - 10
-  type: vless
   server: 31.76.91.132
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
@@ -280,7 +252,7 @@ proxies:
     short-id: db04ce8bdb8900f1
   servername: nvidia.com
   client-fingerprint: firefox
-- name: proxy - 11
+- name: proxy - 10
   type: vless
   server: 144.31.131.38
   port: 443
@@ -350,7 +322,7 @@ proxies:
     short-id: db04ce8bdb8900f1
   servername: eh.vk.ru
   client-fingerprint: firefox
-- name: proxy - 12
+- name: proxy - 11
   type: vless
   server: 90.156.218.163
   port: 443
@@ -364,7 +336,7 @@ proxies:
     short-id: db04ce8bdb8900f1
   servername: eh.vk.ru
   client-fingerprint: firefox
-- name: proxy - 13
+- name: proxy - 12
   type: vless
   server: 188.225.79.44
   port: 443
@@ -391,7 +363,6 @@ proxy-groups:
   - candidate-2
   - candidate-3
   - candidate-4
-  - candidate-6
   - proxy
   - proxy - 2
   - proxy - 3
@@ -402,13 +373,12 @@ proxy-groups:
   - proxy - 8
   - proxy - 9
   - proxy - 10
-  - proxy - 11
   - wl-vkc - 2
   - wl-regru - 2
   - wl-selectel - 2
   - wl-timeweb - 2
+  - proxy - 11
   - proxy - 12
-  - proxy - 13
 - name: AUTO
   type: url-test
   url: http://www.gstatic.com/generate_204
@@ -422,7 +392,6 @@ proxy-groups:
   - candidate-2
   - candidate-3
   - candidate-4
-  - candidate-6
   - proxy
   - proxy - 2
   - proxy - 3
@@ -433,13 +402,12 @@ proxy-groups:
   - proxy - 8
   - proxy - 9
   - proxy - 10
-  - proxy - 11
   - wl-vkc - 2
   - wl-regru - 2
   - wl-selectel - 2
   - wl-timeweb - 2
+  - proxy - 11
   - proxy - 12
-  - proxy - 13
 rules:
 - GEOIP,LAN,DIRECT
 - MATCH,PROXIES
