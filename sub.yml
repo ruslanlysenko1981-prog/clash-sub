@@ -280,6 +280,20 @@ proxies:
     short-id: db04ce8bdb8900f1
   servername: eh.vk.ru
   client-fingerprint: firefox
+- name: wl-vkc-2
+  type: vless
+  server: 109.120.181.153
+  port: 443
+  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
+  udp: true
+  tls: true
+  network: tcp
+  flow: xtls-rprx-vision
+  reality-opts:
+    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
+    short-id: db04ce8bdb8900f1
+  servername: eh.vk.ru
+  client-fingerprint: firefox
 - name: wl-regru - 2
   type: vless
   server: reg-bal.security-sbrf.ru
@@ -374,6 +388,7 @@ proxy-groups:
   - proxy - 9
   - proxy - 10
   - wl-vkc - 2
+  - wl-vkc-2
   - wl-regru - 2
   - wl-selectel - 2
   - wl-timeweb - 2
@@ -403,6 +418,7 @@ proxy-groups:
   - proxy - 9
   - proxy - 10
   - wl-vkc - 2
+  - wl-vkc-2
   - wl-regru - 2
   - wl-selectel - 2
   - wl-timeweb - 2
