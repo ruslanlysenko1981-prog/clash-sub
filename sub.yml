@@ -63,7 +63,7 @@ proxies:
     public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
     short-id: db04ce8bdb8900f1
   client-fingerprint: firefox
-- name: 🇳🇵Автовыбор
+- name: '🇳🇵Автовыбор #2'
   type: hysteria2
   server: 2.59.253.251
   port: 8444
@@ -154,7 +154,7 @@ proxy-groups:
   - 🇳🇵Автовыбор (candidate-2)
   - 🇳🇵Автовыбор (candidate-3)
   - 🇳🇵Автовыбор (candidate-4)
-  - 🇳🇵Автовыбор
+  - '🇳🇵Автовыбор #2'
   - 🇮🇹Италия
   - 🇬🇧Великобритания
   - 🇹🇷Турция
@@ -169,7 +169,7 @@ proxy-groups:
   - 🇳🇵Автовыбор (candidate-2)
   - 🇳🇵Автовыбор (candidate-3)
   - 🇳🇵Автовыбор (candidate-4)
-  - 🇳🇵Автовыбор
+  - '🇳🇵Автовыбор #2'
   - 🇮🇹Италия
   - 🇬🇧Великобритания
   - 🇹🇷Турция
