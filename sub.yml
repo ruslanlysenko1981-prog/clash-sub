@@ -425,5 +425,8 @@ proxy-groups:
   - proxy - 11
   - proxy - 12
 rules:
-- GEOIP,LAN,DIRECT
+- GEOIP,private,DIRECT
+- GEOIP,lan,DIRECT
+- GEOSITE,category-ru,DIRECT
+- GEOIP,ru,DIRECT
 - MATCH,PROXIES
