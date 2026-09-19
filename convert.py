@@ -8,20 +8,37 @@ with open('raw_config.json', 'r', encoding='utf-8') as f:
 ru_proxies = []
 foreign_proxies = []
 
-# Словарь для исключения дубликатов
+# Множество для проверки уникальности ключей подключений (server + port + uuid)
 seen_keys = set()
+# Словарь для отслеживания уникальности имён (имя -> количество)
+name_counts = {}
 
 # Ключевые слова для определения RU нод
 ru_keywords = ["россия", "белые списки", "для заграницы", "🇷🇺", "wl-"]
 
+# Функция для генерации уникального имени прокси в Clash
+def make_unique_name(base_name):
+    base_name = base_name.strip()
+    if base_name not in name_counts:
+        name_counts[base_name] = 1
+        return base_name
+    else:
+        name_counts[base_name] += 1
+        return f"{base_name} #{name_counts[base_name]}"
+
 # 2. Парсинг массива конфигураций
 for cfg in raw_configs:
-    remark = cfg.get("remarks", "").lower()
+    remark = cfg.get("remarks", "").strip()
     outbounds = cfg.get("outbounds", [])
     
     for outbound in outbounds:
         protocol = outbound.get("protocol")
-        
+        tag = outbound.get("tag", "").strip()
+
+        # Игнорируем служебные выходы и балансировщик Автовыбора
+        if tag in ["direct", "block", "dns-out"] or "to-" in tag or "ENTRY-PROXY" in tag:
+            continue
+
         # Парсим VLESS
         if protocol == "vless":
             try:
@@ -29,28 +46,28 @@ for cfg in raw_configs:
                 user = vnext["users"][0]
                 stream = outbound.get("streamSettings", {})
                 reality = stream.get("realitySettings", {})
-                tag = outbound.get("tag", "VLESS")
-                
-                # Игнорируем технические служебные тэги
-                if tag in ["direct", "block", "dns-out"] or "to-" in tag:
-                    continue
 
                 server_addr = vnext["address"]
                 server_port = int(vnext["port"])
                 
-                # Проверка на дубликаты
+                # Проверка на дубликаты физических серверов
                 node_key = f"{server_addr}:{server_port}:{user['id']}"
                 if node_key in seen_keys:
                     continue
                 seen_keys.add(node_key)
 
-                # Название ноды (комбинация remarks и tag)
-                node_name = cfg.get("remarks", tag)
-                if cfg.get("remarks") and tag not in ["proxy", "candidate"]:
-                    node_name = f"{cfg.get('remarks')} ({tag})"
+                # Формируем базовое имя
+                if remark and tag and tag not in ["proxy", "candidate"]:
+                    raw_name = f"{remark} ({tag})"
+                elif remark:
+                    raw_name = remark
+                else:
+                    raw_name = tag or "VLESS"
+
+                unique_name = make_unique_name(raw_name)
 
                 node = {
-                    "name": node_name,
+                    "name": unique_name,
                     "type": "vless",
                     "server": server_addr,
                     "port": server_port,
@@ -75,7 +92,7 @@ for cfg in raw_configs:
                         node["client-fingerprint"] = reality["fingerprint"]
                 
                 # Разделение по категориям
-                if any(kw in remark for kw in ru_keywords) or any(kw in tag.lower() for kw in ru_keywords):
+                if any(kw in remark.lower() for kw in ru_keywords) or any(kw in tag.lower() for kw in ru_keywords):
                     ru_proxies.append(node)
                 else:
                     foreign_proxies.append(node)
@@ -86,7 +103,6 @@ for cfg in raw_configs:
         # Парсим Hysteria2
         elif protocol == "hysteria":
             try:
-                tag = outbound.get("tag", "Hysteria")
                 server_addr = outbound["settings"]["address"]
                 server_port = int(outbound["settings"]["port"])
                 
@@ -95,11 +111,14 @@ for cfg in raw_configs:
                     continue
                 seen_keys.add(node_key)
 
+                raw_name = remark or tag or "Hysteria"
+                unique_name = make_unique_name(raw_name)
+
                 stream = outbound.get("streamSettings", {})
                 tls = stream.get("tlsSettings", {})
 
                 node = {
-                    "name": cfg.get("remarks", tag),
+                    "name": unique_name,
                     "type": "hysteria2",
                     "server": server_addr,
                     "port": server_port,
@@ -108,14 +127,14 @@ for cfg in raw_configs:
                     "skip-cert-verify": True
                 }
 
-                if any(kw in remark for kw in ru_keywords):
+                if any(kw in remark.lower() for kw in ru_keywords) or any(kw in tag.lower() for kw in ru_keywords):
                     ru_proxies.append(node)
                 else:
                     foreign_proxies.append(node)
             except Exception:
                 continue
 
-# Фолбэки, если одна из категорий оказалась пустой
+# Фолбэки
 if not foreign_proxies:
     foreign_proxies = ru_proxies
 if not ru_proxies:
@@ -185,8 +204,7 @@ with open("sub_all_proxy.yml", "w", encoding="utf-8") as f:
 with open("sub_ru_for_abroad.yml", "w", encoding="utf-8") as f:
     yaml.dump(cfg_3, f, allow_unicode=True, sort_keys=False)
 
-# Дефолтный sub.yml (Split-режим)
 with open("sub.yml", "w", encoding="utf-8") as f:
     yaml.dump(cfg_1, f, allow_unicode=True, sort_keys=False)
 
-print(f"Готово! Зарубежных серверов: {len(foreign_proxies)}, RU серверов: {len(ru_proxies)}")
+print(f"Успешно обработано! Зарубежных нод: {len(foreign_proxies)}, RU нод: {len(ru_proxies)}")
