@@ -96,7 +96,10 @@ clash_config = {
         }
     ],
     "rules": [
-        "GEOIP,LAN,DIRECT",
+        "GEOIP,private,DIRECT",
+        "GEOIP,lan,DIRECT",
+        "GEOSITE,category-ru,DIRECT",
+        "GEOIP,ru,DIRECT",
         "MATCH,PROXIES"
     ]
 }
