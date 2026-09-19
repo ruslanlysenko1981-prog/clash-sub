@@ -1,0 +1,183 @@
+mixed-port: 7890
+allow-lan: true
+mode: rule
+log-level: info
+proxies:
+- name: 🇳🇵Автовыбор
+  type: vless
+  server: 31.77.114.114
+  port: 443
+  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
+  udp: true
+  tls: true
+  skip-cert-verify: true
+  network: tcp
+  flow: xtls-rprx-vision
+  servername: api.vk.me
+  reality-opts:
+    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
+    short-id: db04ce8bdb8900f1
+  client-fingerprint: firefox
+- name: 🇳🇵Автовыбор (candidate-2)
+  type: vless
+  server: 31.76.91.132
+  port: 443
+  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
+  udp: true
+  tls: true
+  skip-cert-verify: true
+  network: tcp
+  flow: xtls-rprx-vision
+  servername: nvidia.com
+  reality-opts:
+    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
+    short-id: db04ce8bdb8900f1
+  client-fingerprint: firefox
+- name: 🇳🇵Автовыбор (candidate-3)
+  type: vless
+  server: 31.77.161.15
+  port: 443
+  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
+  udp: true
+  tls: true
+  skip-cert-verify: true
+  network: tcp
+  flow: xtls-rprx-vision
+  servername: nvidia.com
+  reality-opts:
+    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
+    short-id: db04ce8bdb8900f1
+  client-fingerprint: firefox
+- name: 🇳🇵Автовыбор (candidate-4)
+  type: vless
+  server: 2.59.253.251
+  port: 443
+  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
+  udp: true
+  tls: true
+  skip-cert-verify: true
+  network: tcp
+  flow: xtls-rprx-vision
+  servername: nvidia.com
+  reality-opts:
+    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
+    short-id: db04ce8bdb8900f1
+  client-fingerprint: firefox
+- name: 🇳🇵Автовыбор
+  type: hysteria2
+  server: 2.59.253.251
+  port: 8444
+  auth: adc11f30-e4cb-4985-bf5e-f9ded69c019f
+  sni: hy2.pl-node-02.security-sbrf.ru
+  skip-cert-verify: true
+- name: 🇮🇹Италия
+  type: vless
+  server: ooqe994.6551935.xyz
+  port: 443
+  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
+  udp: true
+  tls: true
+  skip-cert-verify: true
+  network: tcp
+  flow: xtls-rprx-vision
+  servername: nvidia.com
+  reality-opts:
+    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
+    short-id: db04ce8bdb8900f1
+  client-fingerprint: firefox
+- name: 🇬🇧Великобритания
+  type: vless
+  server: 31.76.39.230
+  port: 443
+  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
+  udp: true
+  tls: true
+  skip-cert-verify: true
+  network: tcp
+  flow: xtls-rprx-vision
+  servername: nvidia.com
+  reality-opts:
+    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
+    short-id: db04ce8bdb8900f1
+  client-fingerprint: firefox
+- name: 🇹🇷Турция
+  type: vless
+  server: 85.192.48.142
+  port: 443
+  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
+  udp: true
+  tls: true
+  skip-cert-verify: true
+  network: tcp
+  flow: xtls-rprx-vision
+  servername: nvidia.com
+  reality-opts:
+    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
+    short-id: db04ce8bdb8900f1
+  client-fingerprint: firefox
+- name: 🇩🇪Германия | Без роутинга
+  type: vless
+  server: 31.76.249.109
+  port: 443
+  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
+  udp: true
+  tls: true
+  skip-cert-verify: true
+  network: tcp
+  flow: xtls-rprx-vision
+  servername: nvidia.com
+  reality-opts:
+    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
+    short-id: db04ce8bdb8900f1
+  client-fingerprint: firefox
+- name: 🇪🇺Обход АВТО
+  type: vless
+  server: 144.31.131.38
+  port: 443
+  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
+  udp: true
+  tls: true
+  skip-cert-verify: true
+  network: tcp
+  flow: xtls-rprx-vision
+  servername: prod.pl-node-01.security-sbrf.ru
+  reality-opts:
+    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
+    short-id: db04ce8bdb8900f1
+  client-fingerprint: firefox
+proxy-groups:
+- name: PROXIES
+  type: select
+  proxies:
+  - AUTO
+  - 🇳🇵Автовыбор
+  - 🇳🇵Автовыбор (candidate-2)
+  - 🇳🇵Автовыбор (candidate-3)
+  - 🇳🇵Автовыбор (candidate-4)
+  - 🇳🇵Автовыбор
+  - 🇮🇹Италия
+  - 🇬🇧Великобритания
+  - 🇹🇷Турция
+  - 🇩🇪Германия | Без роутинга
+  - 🇪🇺Обход АВТО
+- name: AUTO
+  type: url-test
+  url: http://cp.cloudflare.com/generate_204
+  interval: 300
+  proxies:
+  - 🇳🇵Автовыбор
+  - 🇳🇵Автовыбор (candidate-2)
+  - 🇳🇵Автовыбор (candidate-3)
+  - 🇳🇵Автовыбор (candidate-4)
+  - 🇳🇵Автовыбор
+  - 🇮🇹Италия
+  - 🇬🇧Великобритания
+  - 🇹🇷Турция
+  - 🇩🇪Германия | Без роутинга
+  - 🇪🇺Обход АВТО
+rules:
+- GEOIP,private,DIRECT
+- GEOIP,lan,DIRECT
+- GEOSITE,category-ru,DIRECT
+- GEOIP,ru,DIRECT
+- MATCH,PROXIES
