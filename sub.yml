@@ -40,21 +40,6 @@ proxies:
   auth: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   sni: hy2.pl-node-02.security-sbrf.ru
   skip-cert-verify: true
-- name: 🇳🇵Автовыбор (candidate-4)
-  type: vless
-  server: vless-addr.h2fl.security-sbrf.ru
-  port: 443
-  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
-  udp: true
-  tls: true
-  skip-cert-verify: true
-  network: tcp
-  flow: xtls-rprx-vision
-  servername: nvidia.com
-  reality-opts:
-    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
-    short-id: db04ce8bdb8900f1
-  client-fingerprint: firefox
 - name: 🇮🇹Италия
   type: vless
   server: ooqe994.6551935.xyz
@@ -138,7 +123,6 @@ proxy-groups:
   - 🇳🇵Автовыбор
   - 🇳🇵Автовыбор (candidate-2)
   - '🇳🇵Автовыбор #2'
-  - 🇳🇵Автовыбор (candidate-4)
   - 🇮🇹Италия
   - 🇬🇧Великобритания
   - 🇹🇷Турция
@@ -152,7 +136,6 @@ proxy-groups:
   - 🇳🇵Автовыбор
   - 🇳🇵Автовыбор (candidate-2)
   - '🇳🇵Автовыбор #2'
-  - 🇳🇵Автовыбор (candidate-4)
   - 🇮🇹Италия
   - 🇬🇧Великобритания
   - 🇹🇷Турция
