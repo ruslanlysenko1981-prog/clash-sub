@@ -65,7 +65,7 @@ proxies:
   client-fingerprint: firefox
 - name: '🇳🇵Автовыбор #2'
   type: hysteria2
-  server: 2.59.253.251
+  server: 144.31.5.126
   port: 8444
   auth: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   sni: hy2.pl-node-02.security-sbrf.ru
