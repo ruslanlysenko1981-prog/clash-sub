@@ -87,7 +87,7 @@ proxies:
   client-fingerprint: firefox
 - name: 🇬🇧Великобритания
   type: vless
-  server: 31.76.39.230
+  server: 31.76.39.38
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   udp: true
@@ -102,7 +102,7 @@ proxies:
   client-fingerprint: firefox
 - name: 🇹🇷Турция
   type: vless
-  server: 85.192.48.142
+  server: 144.31.128.106
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   udp: true
@@ -117,7 +117,7 @@ proxies:
   client-fingerprint: firefox
 - name: 🇩🇪Германия | Без роутинга
   type: vless
-  server: 31.76.249.109
+  server: 31.56.18.71
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   udp: true
