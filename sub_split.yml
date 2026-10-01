@@ -20,7 +20,7 @@ proxies:
   client-fingerprint: firefox
 - name: 🇳🇵Автовыбор (candidate-2)
   type: vless
-  server: 31.77.29.7
+  server: 31.76.91.160
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   udp: true
@@ -50,7 +50,7 @@ proxies:
   client-fingerprint: firefox
 - name: 🇳🇵Автовыбор (candidate-4)
   type: vless
-  server: 144.31.5.126
+  server: 191.217.253.1
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   udp: true
@@ -72,7 +72,7 @@ proxies:
   skip-cert-verify: true
 - name: 🇮🇹Италия
   type: vless
-  server: 31.76.113.240
+  server: 31.59.180.183
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   udp: true
