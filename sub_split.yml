@@ -50,7 +50,7 @@ proxies:
   client-fingerprint: firefox
 - name: 🇳🇵Автовыбор (candidate-4)
   type: vless
-  server: 191.217.253.3
+  server: 191.217.253.4
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   udp: true
@@ -65,26 +65,11 @@ proxies:
   client-fingerprint: firefox
 - name: '🇳🇵Автовыбор #2'
   type: hysteria2
-  server: 144.31.5.126
+  server: 191.217.253.4
   port: 8444
   auth: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   sni: hy2.pl-node-02.security-sbrf.ru
   skip-cert-verify: true
-- name: 🇮🇹Италия
-  type: vless
-  server: 31.59.180.183
-  port: 443
-  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
-  udp: true
-  tls: true
-  skip-cert-verify: true
-  network: tcp
-  flow: xtls-rprx-vision
-  servername: nvidia.com
-  reality-opts:
-    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
-    short-id: db04ce8bdb8900f1
-  client-fingerprint: firefox
 - name: 🇬🇧Великобритания
   type: vless
   server: 31.76.39.38
@@ -130,21 +115,6 @@ proxies:
     public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
     short-id: db04ce8bdb8900f1
   client-fingerprint: firefox
-- name: 🇪🇺Обход АВТО
-  type: vless
-  server: 144.31.131.38
-  port: 443
-  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
-  udp: true
-  tls: true
-  skip-cert-verify: true
-  network: tcp
-  flow: xtls-rprx-vision
-  servername: prod.pl-node-01.security-sbrf.ru
-  reality-opts:
-    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
-    short-id: db04ce8bdb8900f1
-  client-fingerprint: firefox
 proxy-groups:
 - name: PROXIES
   type: select
@@ -155,11 +125,9 @@ proxy-groups:
   - 🇳🇵Автовыбор (candidate-3)
   - 🇳🇵Автовыбор (candidate-4)
   - '🇳🇵Автовыбор #2'
-  - 🇮🇹Италия
   - 🇬🇧Великобритания
   - 🇹🇷Турция
   - 🇩🇪Германия | Без роутинга
-  - 🇪🇺Обход АВТО
 - name: AUTO
   type: url-test
   url: http://cp.cloudflare.com/generate_204
@@ -170,11 +138,9 @@ proxy-groups:
   - 🇳🇵Автовыбор (candidate-3)
   - 🇳🇵Автовыбор (candidate-4)
   - '🇳🇵Автовыбор #2'
-  - 🇮🇹Италия
   - 🇬🇧Великобритания
   - 🇹🇷Турция
   - 🇩🇪Германия | Без роутинга
-  - 🇪🇺Обход АВТО
 rules:
 - GEOIP,private,DIRECT
 - GEOIP,lan,DIRECT
