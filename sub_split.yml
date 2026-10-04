@@ -115,6 +115,13 @@ proxies:
     public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
     short-id: db04ce8bdb8900f1
   client-fingerprint: firefox
+- name: wlpl
+  type: hysteria2
+  server: 188.225.79.44
+  port: 4443
+  auth: adc11f30-e4cb-4985-bf5e-f9ded69c019f
+  sni: hy2.pl-node-03.security-sbrf.ru
+  skip-cert-verify: true
 proxy-groups:
 - name: PROXIES
   type: select
@@ -128,6 +135,7 @@ proxy-groups:
   - 🇬🇧Великобритания
   - 🇹🇷Турция
   - 🇩🇪Германия | Без роутинга
+  - wlpl
 - name: AUTO
   type: url-test
   url: http://cp.cloudflare.com/generate_204
@@ -141,6 +149,7 @@ proxy-groups:
   - 🇬🇧Великобритания
   - 🇹🇷Турция
   - 🇩🇪Германия | Без роутинга
+  - wlpl
 rules:
 - GEOIP,private,DIRECT
 - GEOIP,lan,DIRECT
