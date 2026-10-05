@@ -50,7 +50,7 @@ proxies:
   client-fingerprint: firefox
 - name: 🇳🇵Автовыбор (wl-timeweb)
   type: vless
-  server: 188.225.79.44
+  server: ru-t.creds.lol
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   udp: true

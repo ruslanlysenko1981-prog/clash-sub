@@ -5,7 +5,7 @@ log-level: info
 proxies:
 - name: 🇳🇵Автовыбор
   type: vless
-  server: 31.77.28.254
+  server: nl-t.creds.lol
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   udp: true
@@ -50,7 +50,7 @@ proxies:
   client-fingerprint: firefox
 - name: 🇳🇵Автовыбор (candidate-4)
   type: vless
-  server: 191.217.253.4
+  server: ru-h.creds.lol
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   udp: true
@@ -65,7 +65,7 @@ proxies:
   client-fingerprint: firefox
 - name: '🇳🇵Автовыбор #2'
   type: hysteria2
-  server: 191.217.253.4
+  server: 191.217.253.5
   port: 8444
   auth: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   sni: hy2.pl-node-02.security-sbrf.ru
@@ -115,13 +115,6 @@ proxies:
     public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
     short-id: db04ce8bdb8900f1
   client-fingerprint: firefox
-- name: wlpl
-  type: hysteria2
-  server: 188.225.79.44
-  port: 4443
-  auth: adc11f30-e4cb-4985-bf5e-f9ded69c019f
-  sni: hy2.pl-node-03.security-sbrf.ru
-  skip-cert-verify: true
 proxy-groups:
 - name: PROXIES
   type: select
@@ -135,7 +128,6 @@ proxy-groups:
   - 🇬🇧Великобритания
   - 🇹🇷Турция
   - 🇩🇪Германия | Без роутинга
-  - wlpl
 - name: AUTO
   type: url-test
   url: http://cp.cloudflare.com/generate_204
@@ -149,7 +141,6 @@ proxy-groups:
   - 🇬🇧Великобритания
   - 🇹🇷Турция
   - 🇩🇪Германия | Без роутинга
-  - wlpl
 rules:
 - GEOIP,private,DIRECT
 - GEOIP,lan,DIRECT
