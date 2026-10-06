@@ -115,6 +115,21 @@ proxies:
     public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
     short-id: db04ce8bdb8900f1
   client-fingerprint: firefox
+- name: 🇩🇪Германия БС
+  type: vless
+  server: de-f.creds.lol
+  port: 443
+  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
+  udp: true
+  tls: true
+  skip-cert-verify: true
+  network: tcp
+  flow: xtls-rprx-vision
+  servername: eh.vk.ru
+  reality-opts:
+    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
+    short-id: db04ce8bdb8900f1
+  client-fingerprint: firefox
 proxy-groups:
 - name: PROXIES
   type: select
@@ -128,6 +143,7 @@ proxy-groups:
   - 🇬🇧Великобритания
   - 🇹🇷Турция
   - 🇩🇪Германия | Без роутинга
+  - 🇩🇪Германия БС
 - name: AUTO
   type: url-test
   url: http://cp.cloudflare.com/generate_204
@@ -141,6 +157,7 @@ proxy-groups:
   - 🇬🇧Великобритания
   - 🇹🇷Турция
   - 🇩🇪Германия | Без роутинга
+  - 🇩🇪Германия БС
 rules:
 - GEOIP,private,DIRECT
 - GEOIP,lan,DIRECT
