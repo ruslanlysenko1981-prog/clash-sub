@@ -20,21 +20,6 @@ proxies:
   client-fingerprint: firefox
 - name: 🇳🇵Автовыбор (candidate-2)
   type: vless
-  server: 31.77.29.52
-  port: 443
-  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
-  udp: true
-  tls: true
-  skip-cert-verify: true
-  network: tcp
-  flow: xtls-rprx-vision
-  servername: nvidia.com
-  reality-opts:
-    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
-    short-id: db04ce8bdb8900f1
-  client-fingerprint: firefox
-- name: 🇳🇵Автовыбор (candidate-3)
-  type: vless
   server: 31.77.161.27
   port: 443
   uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
@@ -48,7 +33,7 @@ proxies:
     public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
     short-id: db04ce8bdb8900f1
   client-fingerprint: firefox
-- name: 🇳🇵Автовыбор (candidate-4)
+- name: 🇳🇵Автовыбор (candidate-3)
   type: vless
   server: ru-h.creds.lol
   port: 443
@@ -70,21 +55,6 @@ proxies:
   auth: adc11f30-e4cb-4985-bf5e-f9ded69c019f
   sni: hy2.pl-node-02.security-sbrf.ru
   skip-cert-verify: true
-- name: 🇬🇧Великобритания
-  type: vless
-  server: 31.76.39.38
-  port: 443
-  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
-  udp: true
-  tls: true
-  skip-cert-verify: true
-  network: tcp
-  flow: xtls-rprx-vision
-  servername: nvidia.com
-  reality-opts:
-    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
-    short-id: db04ce8bdb8900f1
-  client-fingerprint: firefox
 - name: 🇹🇷Турция
   type: vless
   server: 144.31.128.106
@@ -123,9 +93,7 @@ proxy-groups:
   - 🇳🇵Автовыбор
   - 🇳🇵Автовыбор (candidate-2)
   - 🇳🇵Автовыбор (candidate-3)
-  - 🇳🇵Автовыбор (candidate-4)
   - '🇳🇵Автовыбор #2'
-  - 🇬🇧Великобритания
   - 🇹🇷Турция
   - 🇩🇪Германия | Без роутинга
 - name: AUTO
@@ -136,9 +104,7 @@ proxy-groups:
   - 🇳🇵Автовыбор
   - 🇳🇵Автовыбор (candidate-2)
   - 🇳🇵Автовыбор (candidate-3)
-  - 🇳🇵Автовыбор (candidate-4)
   - '🇳🇵Автовыбор #2'
-  - 🇬🇧Великобритания
   - 🇹🇷Турция
   - 🇩🇪Германия | Без роутинга
 rules:
