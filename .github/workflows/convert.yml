@@ -22,8 +22,8 @@ jobs:
 
       - name: Download Raw Sub
         run: |
-          curl -s "https://sub.kushmakers.org/new/vhipHZeuGxXZfzJ9Z6ESUS" -o raw_config.json
-
+          curl -s --retry 5 --retry-delay 10 --max-time 30 "https://sub.kushmakers.org/new/vhipHZeuGxXZfzJ9Z6ESUS" -o raw_config.json || echo "Failed to download, using cache if available"
+     
       - name: Run Converter Script
         run: |
           python3 convert.py
