@@ -3,118 +3,27 @@ allow-lan: true
 mode: rule
 log-level: info
 proxies:
-- name: 🇳🇵Автовыбор (wl-vkc)
+- name: 🚫 Subscription disabled
   type: vless
-  server: 90.156.218.163
-  port: 443
-  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
+  server: 0.0.0.0
+  port: 1
+  uuid: 00000000-0000-0000-0000-000000000000
   udp: true
-  tls: true
+  tls: false
   skip-cert-verify: true
   network: tcp
-  flow: xtls-rprx-vision
-  servername: eh.vk.ru
-  reality-opts:
-    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
-    short-id: db04ce8bdb8900f1
-  client-fingerprint: firefox
-- name: 🇳🇵Автовыбор (wl-regru)
-  type: vless
-  server: 95.163.232.8
-  port: 555
-  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
-  udp: true
-  tls: true
-  skip-cert-verify: true
-  network: tcp
-  flow: xtls-rprx-vision
-  servername: prod.pl-node-01.security-sbrf.ru
-  reality-opts:
-    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
-    short-id: db04ce8bdb8900f1
-  client-fingerprint: firefox
-- name: 🇳🇵Автовыбор (wl-selectel)
-  type: vless
-  server: 87.228.101.143
-  port: 443
-  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
-  udp: true
-  tls: true
-  skip-cert-verify: true
-  network: tcp
-  flow: xtls-rprx-vision
-  servername: eh.vk.ru
-  reality-opts:
-    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
-    short-id: db04ce8bdb8900f1
-  client-fingerprint: firefox
-- name: 🇳🇵Автовыбор (wl-timeweb)
-  type: vless
-  server: ru-t.creds.lol
-  port: 443
-  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
-  udp: true
-  tls: true
-  skip-cert-verify: true
-  network: tcp
-  flow: xtls-rprx-vision
-  servername: eh.vk.ru
-  reality-opts:
-    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
-    short-id: db04ce8bdb8900f1
-  client-fingerprint: firefox
-- name: 🇷🇺Россия | Для заграницы
-  type: vless
-  server: 212.113.121.24
-  port: 443
-  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
-  udp: true
-  tls: true
-  skip-cert-verify: true
-  network: tcp
-  flow: xtls-rprx-vision
-  servername: nvidia.com
-  reality-opts:
-    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
-    short-id: db04ce8bdb8900f1
-  client-fingerprint: firefox
-- name: 🇪🇺Обход АВТО (wl-vkc-2)
-  type: vless
-  server: 109.120.181.153
-  port: 443
-  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
-  udp: true
-  tls: true
-  skip-cert-verify: true
-  network: tcp
-  flow: xtls-rprx-vision
-  servername: eh.vk.ru
-  reality-opts:
-    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
-    short-id: db04ce8bdb8900f1
-  client-fingerprint: firefox
 proxy-groups:
 - name: PROXIES
   type: select
   proxies:
   - AUTO
-  - 🇳🇵Автовыбор (wl-vkc)
-  - 🇳🇵Автовыбор (wl-regru)
-  - 🇳🇵Автовыбор (wl-selectel)
-  - 🇳🇵Автовыбор (wl-timeweb)
-  - 🇷🇺Россия | Для заграницы
-  - 🇪🇺Обход АВТО (wl-vkc-2)
+  - 🚫 Subscription disabled
 - name: AUTO
   type: url-test
   url: http://cp.cloudflare.com/generate_204
   interval: 300
   proxies:
-  - 🇳🇵Автовыбор (wl-vkc)
-  - 🇳🇵Автовыбор (wl-regru)
-  - 🇳🇵Автовыбор (wl-selectel)
-  - 🇳🇵Автовыбор (wl-timeweb)
-  - 🇷🇺Россия | Для заграницы
-  - 🇪🇺Обход АВТО (wl-vkc-2)
+  - 🚫 Subscription disabled
 rules:
 - GEOIP,private,DIRECT
 - GEOIP,lan,DIRECT

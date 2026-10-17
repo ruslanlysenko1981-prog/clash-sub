@@ -3,110 +3,27 @@ allow-lan: true
 mode: rule
 log-level: info
 proxies:
-- name: 🇳🇵Автовыбор
+- name: 🚫 Subscription disabled
   type: vless
-  server: nl-t.creds.lol
-  port: 443
-  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
+  server: 0.0.0.0
+  port: 1
+  uuid: 00000000-0000-0000-0000-000000000000
   udp: true
-  tls: true
+  tls: false
   skip-cert-verify: true
   network: tcp
-  flow: xtls-rprx-vision
-  servername: api.vk.me
-  reality-opts:
-    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
-    short-id: db04ce8bdb8900f1
-  client-fingerprint: firefox
-- name: 🇳🇵Автовыбор (candidate-2)
-  type: vless
-  server: 31.77.29.237
-  port: 443
-  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
-  udp: true
-  tls: true
-  skip-cert-verify: true
-  network: tcp
-  flow: xtls-rprx-vision
-  servername: nvidia.com
-  reality-opts:
-    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
-    short-id: db04ce8bdb8900f1
-  client-fingerprint: firefox
-- name: 🇳🇵Автовыбор (candidate-3)
-  type: vless
-  server: ru-h.creds.lol
-  port: 443
-  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
-  udp: true
-  tls: true
-  skip-cert-verify: true
-  network: tcp
-  flow: xtls-rprx-vision
-  servername: nvidia.com
-  reality-opts:
-    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
-    short-id: db04ce8bdb8900f1
-  client-fingerprint: firefox
-- name: '🇳🇵Автовыбор #2'
-  type: hysteria2
-  server: 191.217.253.5
-  port: 8444
-  auth: adc11f30-e4cb-4985-bf5e-f9ded69c019f
-  sni: hy2.pl-node-02.security-sbrf.ru
-  skip-cert-verify: true
-- name: 🇹🇷Турция
-  type: vless
-  server: 144.31.128.106
-  port: 443
-  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
-  udp: true
-  tls: true
-  skip-cert-verify: true
-  network: tcp
-  flow: xtls-rprx-vision
-  servername: nvidia.com
-  reality-opts:
-    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
-    short-id: db04ce8bdb8900f1
-  client-fingerprint: firefox
-- name: 🇩🇪Германия | Без роутинга
-  type: vless
-  server: 31.77.153.51
-  port: 443
-  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
-  udp: true
-  tls: true
-  skip-cert-verify: true
-  network: tcp
-  flow: xtls-rprx-vision
-  servername: nvidia.com
-  reality-opts:
-    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
-    short-id: db04ce8bdb8900f1
-  client-fingerprint: firefox
 proxy-groups:
 - name: PROXIES
   type: select
   proxies:
   - AUTO
-  - 🇳🇵Автовыбор
-  - 🇳🇵Автовыбор (candidate-2)
-  - 🇳🇵Автовыбор (candidate-3)
-  - '🇳🇵Автовыбор #2'
-  - 🇹🇷Турция
-  - 🇩🇪Германия | Без роутинга
+  - 🚫 Subscription disabled
 - name: AUTO
   type: url-test
   url: http://cp.cloudflare.com/generate_204
   interval: 300
   proxies:
-  - 🇳🇵Автовыбор
-  - 🇳🇵Автовыбор (candidate-2)
-  - 🇳🇵Автовыбор (candidate-3)
-  - '🇳🇵Автовыбор #2'
-  - 🇹🇷Турция
-  - 🇩🇪Германия | Без роутинга
+  - 🚫 Subscription disabled
 rules:
 - GEOIP,private,DIRECT
 - GEOIP,lan,DIRECT
